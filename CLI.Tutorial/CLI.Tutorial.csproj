@@ -5,4 +5,8 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MatthiWare.CommandLineParser" Version="0.2.1" />
+  </ItemGroup>
+
 </Project>
