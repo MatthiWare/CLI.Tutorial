@@ -6,7 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MatthiWare.CommandLineParser" Version="0.2.1" />
+    <PackageReference Include="FluentValidation" Version="8.5.1" />
+    <PackageReference Include="MatthiWare.CommandLineParser" Version="0.2.4" />
+    <PackageReference Include="MatthiWare.CommandLineParser.Extensions.FluentValidations" Version="0.2.4" />
   </ItemGroup>
 
 </Project>

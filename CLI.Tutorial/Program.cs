@@ -1,6 +1,8 @@
-﻿using System;
-using CLI.Tutorial.Options;
+﻿using CLI.Tutorial.Options;
+using CLI.Tutorial.Validations;
 using MatthiWare.CommandLine;
+using MatthiWare.CommandLine.Extensions.FluentValidations;
+using System;
 
 namespace CLI.Tutorial
 {
@@ -10,10 +12,17 @@ namespace CLI.Tutorial
         {
             var options = new CommandLineParserOptions
             {
-                AppName = "CLI.Tutorial"
+                AppName = "CLI.Tutorial",
+                PrefixShortOption = "/",
+                PrefixLongOption = "--",
+                PostfixOption = "="
             };
 
             var parser = new CommandLineParser<ProgramOptions>(options);
+
+            parser.UseFluentValidations(configurator
+                => configurator.AddValidator<ProgramOptions, ProgramOptionValidator>()
+                    .AddValidator<StartOptions, StartOptionValidator>());
 
             parser.AddCommand<StartOptions>()
                 .Name("start")
@@ -29,6 +38,11 @@ namespace CLI.Tutorial
             if (result.HasErrors)
             {
                 Console.Error.WriteLine("Parsing has errors..");
+
+                foreach (var ex in result.Errors)
+                    Console.Error.WriteLine(ex);
+
+                Console.ReadLine();
                 return;
             }
 
@@ -38,6 +52,8 @@ namespace CLI.Tutorial
             Console.WriteLine($"Username: {programOptions.Username}");
             Console.WriteLine($"Password: {programOptions.Password}");
             Console.WriteLine($"Verbose: {programOptions.Verbose}");
+
+            Console.ReadLine();
         }
     }
 }
