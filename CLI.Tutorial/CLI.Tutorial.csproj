@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -6,9 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="8.5.1" />
-    <PackageReference Include="MatthiWare.CommandLineParser" Version="0.2.4" />
-    <PackageReference Include="MatthiWare.CommandLineParser.Extensions.FluentValidations" Version="0.2.4" />
+    <PackageReference Include="FluentValidation" Version="8.6.1" />
+    <PackageReference Include="MatthiWare.CommandLineParser" Version="0.3.0" />
+    <PackageReference Include="MatthiWare.CommandLineParser.Extensions.FluentValidations" Version="0.3.0" />
   </ItemGroup>
 
 </Project>
