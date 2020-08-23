@@ -3,6 +3,7 @@ using CLI.Tutorial.Validations;
 using MatthiWare.CommandLine;
 using MatthiWare.CommandLine.Extensions.FluentValidations;
 using System;
+using System.Reflection;
 
 namespace CLI.Tutorial
 {
@@ -24,14 +25,7 @@ namespace CLI.Tutorial
                 => configurator.AddValidator<ProgramOptions, ProgramOptionValidator>()
                     .AddValidator<StartOptions, StartOptionValidator>());
 
-            parser.AddCommand<StartOptions>()
-                .Name("start")
-                .Required(false)
-                .Description("Start the server")
-                .OnExecuting((p, s) =>
-                {
-                    Console.WriteLine($"Server start on port {s.Port}");
-                });
+            parser.DiscoverCommands(Assembly.GetCallingAssembly());
 
             var result = parser.Parse(args);
 
