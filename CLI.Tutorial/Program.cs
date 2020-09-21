@@ -1,7 +1,9 @@
-﻿using CLI.Tutorial.Options;
+﻿using CLI.Tutorial.DI;
+using CLI.Tutorial.Options;
 using CLI.Tutorial.Validations;
 using MatthiWare.CommandLine;
 using MatthiWare.CommandLine.Extensions.FluentValidations;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Reflection;
 
@@ -19,11 +21,15 @@ namespace CLI.Tutorial
                 PostfixOption = "="
             };
 
-            var parser = new CommandLineParser<ProgramOptions>(options);
+            var services = new ServiceCollection();
 
-            parser.UseFluentValidations(configurator
-                => configurator.AddValidator<ProgramOptions, ProgramOptionValidator>()
-                    .AddValidator<StartOptions, StartOptionValidator>());
+            services.AddScoped<ICustomInjectedService, SomeService>();
+
+            var parser = new CommandLineParser<ProgramOptions>(options, services);
+
+            parser.UseFluentValidations(configurator => configurator
+                .AddValidator<ProgramOptions, ProgramOptionValidator>()
+                .AddValidator<StartOptions, StartOptionValidator>());
 
             parser.DiscoverCommands(Assembly.GetCallingAssembly());
 
